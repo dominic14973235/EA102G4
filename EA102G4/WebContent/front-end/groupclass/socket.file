@@ -1,0 +1,68 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css">
+
+<div class="container">
+	<!--
+		觸發的 a 或 butto n加上 class="js-trigger-toast"
+		要顯示的句子就放 data-strings 裡
+		有標題就放 data-head
+		想改計時的顏色就放 data-color，沒有的話預設是 #CD0505
+		想改維持的時間就放 data-time，沒有的話預設是 3000(3秒)
+	-->
+	<button id="goToOrder" type="button" class="js-trigger-toast" data-head="消息通知" data-strings="有會員購買你的團課哦" data-color="#2196F3" data-time="8000" style="display:none;"></button>
+</div>
+<!-- 引用js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+<script>
+var dataStrigByGC;
+	$(function() {
+		var triggerToast = function(head, strings, color, time) {
+			$.toast({
+				heading: head,
+				text: strings,
+				loaderBg: color,
+				hideAfter: Number(time)
+			});
+		}
+		$('.js-trigger-toast').each(function() {
+			$(this).on('click', function() {
+				var h = $(this).data('head') || false,
+						s = $(this).data('strings'),
+						c = $(this).data('color') || '#CD0505',
+						t = $(this).data('time') || 5000;
+				triggerToast(h, s, c, t);
+			});
+		});
+	});
+</script>
+<script>
+//$('#goToOrder').click(function(){
+//var url = "<%=request.getContextPath()%>/front-end/groupclass/listProOrder.jsp";
+//					console.log(url);
+//					var orderView = $(location).attr('href', url);
+//					var timeoutID = window.setTimeout( ( () => orderView ), 5000);
+//});
+var PointByGC = "/front-end/groupclass/GroupOrderSocket/${memVOLogin.mem_id}";
+	var hostByGC = window.location.host;
+	var pathByGC = window.location.pathname;
+	var webCtxByGC = pathByGC.substring(0, pathByGC.indexOf('/', 1));
+	var endPointURLByGC = "ws://" + window.location.host + webCtxByGC + PointByGC;
+	var selfByGC = '${memVOLogin.mem_id}';
+	var webSocketByGC;
+	console.log(endPointURLByGC);
+	function connectByGC() {
+		webSocketByGC = new WebSocket(endPointURLByGC);
+		webSocketByGC.onopen = function(event) {
+			console.log('websocket-onopen from cart' + selfByGC);
+			
+		};
+		webSocketByGC.onmessage = function(event) {
+			console.log(event.data);
+			dataStrigByGC=event.data;
+			$('.js-trigger-toast').trigger('click');
+		};
+		webSocketByGC.onclose = function(event) {
+			console.log("Disconnected!");
+		};
+	};
+	</script>

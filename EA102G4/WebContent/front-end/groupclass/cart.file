@@ -1,0 +1,46 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<div class="dropdown" style="float:right;position: fixed;top:95%;right:0px;z-index:1"width="15%">
+        <button class="btn btn-cart" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false" width="15%"> 
+<!--             <i class="fas fa-shopping-cart fa-2x"> -->
+            <img src="<%=request.getContextPath()%>/front-end/groupclass/img/cart.png" width="10%" height="10%">
+<!--             </i> -->
+            <span class="badge badge-pill badge-danger" id="cartSize"> ${ fn:length( orderDetails ) } </span>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" style="min-width: 300px;">
+            <div class="px-4 py-3">
+                <div class="h6">已選購團課</div>
+                <table class="table table-sm godVO">
+                <c:forEach var="godVO" items="${orderDetails}">
+                    <tr class="details">
+                        <td>
+                            <a href="#">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
+                        </td>
+                        <td>
+                            ${gcSvc.getOneGroupClass(godVO.g_class_no).g_name}
+                        </td>
+<%--                         <td>${}</td> --%>
+                        <td>$ ${godVO.p_coin}</td>
+                    </tr>
+                    </c:forEach>
+                </table>
+                <button id="goToBuy"class="btn btn-primary btn-block" type="button">
+<!--                     <i class="fas fa-shopping-cart"></i> -->
+                    結帳去
+                </button>
+            </div>
+        </div>
+    </div>
+    
+      <script>
+  $('#goToBuy').click(function(e){
+	  e.preventDefault(e);
+	  var url = "<%=request.getContextPath()%>/front-end/groupclass/insertForGroupOrderList.jsp";
+		console.log(url);
+		var orderView = $(location).attr('href', url);
+		var timeoutID = window.setTimeout( ( () => orderView ), 5000);
+  })
+  </script>

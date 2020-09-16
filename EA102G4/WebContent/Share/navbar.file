@@ -1,0 +1,101 @@
+ <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <!-- navbar start -->
+    <div class="zarxio-navbar">
+        <nav class="navbar navbar-area navbar-expand-lg nav-style-01">
+            <div class="container nav-container">
+                <div class="responsive-mobile-menu">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#billatrail_main_menu" 
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        <span class="bar1"></span>
+                        <span class="bar2"></span>
+                        <span class="bar3"></span>
+                    </button>
+                </div>
+                
+                <div class="logo">
+					<a href="<%=request.getContextPath() %>/front-end/index.jsp"> <img src="assets/img/logo.png" alt="logo"></a>
+				</div>
+               
+                <div class="collapse navbar-collapse" id="billatrail_main_menu">
+                	
+                    <ul class="navbar-nav menu-open">
+                    
+                        <li class="menu-item-has-children">
+                           <a href="#">Coach&Class</a>
+					       <ul class="sub-menu">
+						       <li><a href="${request.getContextPath() }/EA102G4/front-end/ProAndClass/pro.jsp">TrainerClass</a></li>
+						       <li><a href="${request.getContextPath() }/EA102G4/front-end/ProAndClass/classes.jsp">Trainer</a></li>
+						       <li><a href="${request.getContextPath() }/EA102G4/front-end/ProAndClass/proApplication.jsp">TrainerApplication</a></li>
+						       <li><a href="${request.getContextPath() }/EA102G4/front-end/ProAndClass/myClass.jsp">TrainerBack-end</a></li>
+					       </ul>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="#">InGymStore</a>
+                            <ul class="sub-menu">
+                                <li><a href="${pageContext.request.contextPath}/front-end/product/list-all-product.jsp">商城首頁</a></li>
+                                <li><a href="${pageContext.request.contextPath}/front-end/product/add-product.jsp">賣家商品上架</a></li>
+                                <li><a href="${pageContext.request.contextPath}/front-end/product/list-product-by-memId.jsp">賣家商品管理</a></li>
+                                <li><a href="${pageContext.request.contextPath}/front-end/purchase-order/list-order-by-memId-seller.jsp">賣家訂單管理</a></li>
+                                <li><a href="${pageContext.request.contextPath}/front-end/purchase-order/list-order-by-memId-buyer.jsp">買家訂單管理</a></li>
+                                <li><a href="${pageContext.request.contextPath}/front-end/product-tracking/list-all-tracking.jsp">追蹤中</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item-has-children"><a href="#">Activity</a>
+							<ul class="sub-menu">
+								<li><a href="<%=request.getContextPath()%>/front-end/gpt/listAllGroup.jsp">Activity</a></li>
+								<li><a href="<%=request.getContextPath()%>/front-end/gpt/group.do?action=viewMyGroup&mem_id=${memVOLogin.mem_id }">My
+										Activity</a></li>
+								<li><a href="<%=request.getContextPath()%>/front-end/gpt/groupAdd.jsp">Create Activity</a></li>
+							</ul>
+						</li>
+                        <li class="menu-item-has-children">
+                            <a href="#">Blog</a>
+                            <ul class="sub-menu">
+                                <li><a href="/EA102G4/front-end/article/listAllArticle.jsp">Blog</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="#">Member</a>
+                            <ul class="sub-menu">
+                                <li><a href="<%=request.getContextPath()%>/front-end/mem/memDetail.jsp">Personal Information</a></li>
+                                <li><a href="<%=request.getContextPath()%>/front-end/bodyrecord/bodyRecord.jsp">MyBodyData</a></li>
+                                <li><a href="<%=request.getContextPath()%>/front-end/sportrecord/sportRecord.jsp">MySportData</a></li>
+                                <li><a href="<%=request.getContextPath()%>/front-end/foodrecord/foodRecord.jsp">MyFoodRecord</a></li>
+                                <%if (memVOLogin != null) {%>
+                                <li><a href="<%=request.getContextPath()%>/front-end/mem/changeMyPassword.jsp">ChangeMyPassword</a></li>
+                                <%}%>
+                            </ul>
+                        </li>
+                        <%if(memVOLogin != null){ %>
+    					<li>
+						<a href ="<%=request.getContextPath()%>/front-end/mem/mem.do?action=logout">Logout</a>
+						</li>
+    					<%}else{ %>
+                        <li><a href="<%=request.getContextPath()%>/front-end/mem/signin.jsp">Login</a></li>
+                        <%} %>
+                    </ul>
+                </div>
+                 <%if(memVOLogin != null){ %>
+    				<a id = "hi_mem" href ="<%=request.getContextPath()%>/front-end/mem/memDetail.jsp">Welcome!<%=memVOLogin.getMem_name()%></a>
+    			<%} %>
+                <div class="nav-right-part">
+                    <ul>
+                        <li class="search" id="search">
+                            <a href="#"><i class="fa fa-search"></i></a>
+                        </li>
+                        <li>
+                            <div class="hamberger-area d-none d-lg-block">
+                                <div class="menu-toggle hamburger hamburger--squeeze is-active">
+                                    <div class="hamburger-box">
+                                        <div class="hamburger-inner"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- navbar end -->

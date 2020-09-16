@@ -1,0 +1,189 @@
+@charset "BIG5";
+
+div#container {
+	width: 100%;
+}
+
+.calendar {
+	display: inline-block;
+	width: 80%;
+	background-color: white;
+	padding: 16px;
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+/* 	border: 2px solid lightgreen; not necessary */
+
+}
+
+/* collapse window beside calendar */
+.calendar-events {
+    display: inline-block;
+    width: 18%;
+    height: 554px;
+    background-color: #88c13f;
+    overflow: scroll;
+    text-align: left;
+    position: absolute;
+    margin-top: 85px;
+}
+
+
+span.open{
+	font-size:20px;	
+}
+
+span.close {
+    font-size: 20px;
+}
+
+.calendar .top {
+	display: inline-block;
+	width: 100%;
+	height: 46px;
+	line-height: 40px;
+	*zoom: 1;
+/* 	border: 2px solid red; not necessary */
+}
+
+.calendar .top:after {
+	display: table;
+	content: "";
+	line-height: 0;
+	clear: both
+}
+
+.calendar .top>* {
+	float: left;
+	display: inline-block
+}
+
+.calendar .top .title {
+	width: calc(100% - 200px);
+/* 	border: 2px solid blue; not necessary */
+}
+
+.calendar .top .title:after {
+	content: attr(data-y) "ж~" attr(data-m) "ды"
+}
+
+.calendar .top .btns {
+	width: 200px;
+	text-align: right;
+/* 	border: 2px solid blue; not necessary */
+}
+
+.calendar .top .btns>button {
+	border: 1px solid #c8c8c8;
+	background-color: white;
+	height: 25px;
+	line-height: 25px;
+	padding: 0 5px;
+	font-size: 16px;
+	margin-top: 8px
+}
+
+.calendar .month {
+	display: table;
+	border-spacing: 0;
+	border-collapse: collapse;
+	table-layout: fixed;
+	width: 100%;
+	margin-top: 16px
+}
+
+.calendar .month .weeks, .calendar .month .days {
+	display: table-row
+}
+
+.calendar .month .weeks>div, .calendar .month .days>div {
+	display: table-cell;
+	width: calc(100%/ 7);
+	border: 1px solid #c8c8c8
+}
+
+.calendar .month .weeks>div { /* week day */
+	height: 35px;
+	line-height: 35px;
+	text-align: center;
+	background-color: #696969;
+	font-weight: bold;
+	color: #88c13f;
+}
+
+.calendar .month .days>div {
+	position: relative;
+	height: 100px;
+	-moz-transition: background-color .3s;
+	-o-transition: background-color .3s;
+	-webkit-transition: background-color .3s;
+	transition: background-color .3s
+}
+
+.calendar .month .days>div[data-y][data-m][data-d]:after {
+	content: attr(data-d);
+	/* 	attr(data-y) "/" attr(data-m) "/"  if need to show year, month in calendar */
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: inline-block
+}
+
+.calendar .month .days>div.next-prev-month {
+	background-color: #f0f0f0;
+}
+
+.calendar .month .days>div.today {
+	background-color: #88c13f
+}
+
+.calendar .month .days>div:hover {
+	background-color: #88c13f
+}
+
+@media screen and (max-width: 499px) and (min-width: 0) {
+	.calendar .month {
+		display: inline-block
+	}
+	.calendar .month .weeks, .calendar .month .days {
+		display: inline-block;
+		width: 100%
+	}
+	.calendar .month .weeks>div, .calendar .month .days>div {
+		display: inline-block;
+		width: 100%
+	}
+	.calendar .month .weeks {
+		display: none
+	}
+	.calendar .month .days>div {
+		height: auto;
+		min-height: 111px;
+		border: 0;
+		border-top: 1px solid #c8c8c8
+	}
+	.calendar .month .days>div[data-y][data-m][data-d]:after {
+		top: 4px;
+		right: 4px
+	}
+	.calendar .month .days>div.next-prev-month {
+		display: none
+	}
+}
+.days {
+    text-align: left;
+}
+
+.modal-body {
+    align-self: center;
+	width: 100%;
+}
+.modal-body > div > div {
+	display: flex;
+}
+.modal-body > div > div > div:nth-child(1) {
+    width: 30%;
+}
+.modal-body > div > div > div:nth-child(2) {
+    width: 70%;
+}
